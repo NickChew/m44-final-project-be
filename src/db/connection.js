@@ -1,13 +1,13 @@
-require("dotenv").config();
+// require("dotenv").config();
 
 
 
-async function connection() {
-  try {
+// async function connection() {
+//   try {
     
-  } catch (error) {
+//   } catch (error) {
     
-  }
-};
+//   }
+// };
 
-connection();
+// connection();
