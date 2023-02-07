@@ -1,6 +1,6 @@
 // // change to sequalize
 // // const mongoose = require("mongoose");
-
+//this is Hasan
 // const userSchema = new mongoose.Schema ({
 //   username: {
 //     type: String,
