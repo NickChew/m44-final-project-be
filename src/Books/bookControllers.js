@@ -26,7 +26,7 @@ exports.listBooks = async (request, response) => {
 exports.updateAuthor = async (request, response) => {
     try {
         await Books.updateOne({title: request.body.title}, {author: request.body.author}),
-        response.send({msg: "Author updated for ${request.body.title}"});
+        response.send({msg: `Author updated for ${request.body.title}`});
     } catch (error) {
         console.log(error);
         response.status(401).send({error: error.message});
