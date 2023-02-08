@@ -1,0 +1,283 @@
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (main)
+$ git branch
+* main
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (main)
+$ git branch -a
+* main
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/dev
+  remotes/origin/feature/books
+  remotes/origin/feature/database
+  remotes/origin/feature/user
+  remotes/origin/main
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (main)
+$ git switch dev
+Switched to a new branch 'dev'
+branch 'dev' set up to track 'origin/dev'.
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (dev)
+$ git pull
+Already up to date.
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (dev)
+$ git switch feature/user
+Switched to a new branch 'feature/user'
+branch 'feature/user' set up to track 'origin/feature/user'.
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (feature/user)
+$ git rebase dev
+Current branch feature/user is up to date.
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (feature/user)
+$ git switch -c user_usermodels_ha
+Switched to a new branch 'user_usermodels_ha'
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (user_usermodels_ha)
+$ git add .
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (user_usermodels_ha)
+$ git commit -m "this is Hasan"
+[user_usermodels_ha ad2cb19] this is Hasan
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (user_usermodels_ha)
+$ git log --oneline --graph
+* ad2cb19 (HEAD -> user_usermodels_ha) this is Hasan
+* 238d230 (origin/main, origin/feature/user, origin/feature/database, origin/feature/books, origin/dev, origin/HEAD, main, featur
+e/user, dev) setup
+* c30e8cb setup
+* ae6c122 added start to json
+* b37f145 setup
+* 652954f first commit
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (user_usermodels_ha)
+$ git switch dev
+Switched to branch 'dev'
+Your branch is up to date with 'origin/dev'.
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (dev)
+$ git log --oneline --graph
+* 238d230 (HEAD -> dev, origin/main, origin/feature/user, origin/feature/database, origin/feature/books, origin/dev, origin/HEAD,
+ main, feature/user) setup
+* c30e8cb setup
+* ae6c122 added start to json
+* b37f145 setup
+* 652954f first commit
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (dev)
+$ git switch user_usermodels_ha
+Switched to branch 'user_usermodels_ha'
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (user_usermodels_ha)
+$ git log --oneline --graph
+* ad2cb19 (HEAD -> user_usermodels_ha) this is Hasan
+* 238d230 (origin/main, origin/feature/user, origin/feature/database, origin/feature/books, origin/dev, origin/HEAD, main, featur
+e/user, dev) setup
+* c30e8cb setup
+* ae6c122 added start to json
+* b37f145 setup
+* 652954f first commit
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (user_usermodels_ha)
+$ git push origin user_usermodels_ha
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 471 bytes | 235.00 KiB/s, done.
+Total 5 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+remote:
+remote: Create a pull request for 'user_usermodels_ha' on GitHub by visiting:
+remote:      https://github.com/NickChew/m44-final-project-be/pull/new/user_usermodels_ha
+remote:
+To https://github.com/NickChew/m44-final-project-be
+ * [new branch]      user_usermodels_ha -> user_usermodels_ha
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (user_usermodels_ha)
+$ git switch dev
+Switched to branch 'dev'
+Your branch is up to date with 'origin/dev'.
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (dev)
+$ git log --oneline --graph
+* 238d230 (HEAD -> dev, origin/main, origin/feature/user, origin/feature/database, origin/feature/books, origin/dev, origin/HEAD,
+ main, feature/user) setup
+* c30e8cb setup
+* ae6c122 added start to json
+* b37f145 setup
+* 652954f first commit
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (dev)
+$ git pull
+remote: Enumerating objects: 2, done.
+remote: Counting objects: 100% (2/2), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 2 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (2/2), 1.22 KiB | 124.00 KiB/s, done.
+From https://github.com/NickChew/m44-final-project-be
+   238d230..95979f3  dev          -> origin/dev
+   238d230..87a5178  feature/user -> origin/feature/user
+Updating 238d230..95979f3
+Fast-forward
+ src/user/userModels.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (dev)
+$ git log --oneline --graph
+*   95979f3 (HEAD -> dev, origin/dev) Merge pull request #3 from NickChew/feature/user
+|\
+| * 87a5178 (origin/feature/user) Merge pull request #2 from NickChew/user_usermodels_ha
+|/|
+| * ad2cb19 (origin/user_usermodels_ha, user_usermodels_ha) this is Hasan
+|/
+* 238d230 (origin/main, origin/feature/database, origin/feature/books, origin/HEAD, main, feature/user) setup
+* c30e8cb setup
+* ae6c122 added start to json
+* b37f145 setup
+* 652954f first commit
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (dev)
+$ git swich feature/user
+git: 'swich' is not a git command. See 'git --help'.
+
+The most similar command is
+        switch
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (dev)
+$ git switch feature/user
+Switched to branch 'feature/user'
+Your branch is behind 'origin/feature/user' by 2 commits, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (feature/user)
+$ git log
+commit 238d23008c58d776ab12e5ac394917c10543adad (HEAD -> feature/user, origin/main, origin/feature/database, origin/feature/books
+, origin/HEAD, main)
+Author: NickChew <118730370+NickChew@users.noreply.github.com>
+Date:   Tue Feb 7 11:43:27 2023 +0000
+
+    setup
+
+commit c30e8cbcf99ae9be4230a876d957aaf935071b78
+Author: NickChew <118730370+NickChew@users.noreply.github.com>
+Date:   Tue Feb 7 11:37:21 2023 +0000
+
+    setup
+
+:
+commit 238d23008c58d776ab12e5ac394917c10543adad (HEAD -> feature/user, origin/main, origin/feature/database, origin/feature/books
+, origin/HEAD, main)
+Author: NickChew <118730370+NickChew@users.noreply.github.com>
+Date:   Tue Feb 7 11:43:27 2023 +0000
+
+    setup
+
+commit c30e8cbcf99ae9be4230a876d957aaf935071b78
+Author: NickChew <118730370+NickChew@users.noreply.github.com>
+Date:   Tue Feb 7 11:37:21 2023 +0000
+
+    setup
+
+:
+commit 238d23008c58d776ab12e5ac394917c10543adad (HEAD -> feature/user, origin/main, origin/feature/database, origin/feature/books
+, origin/HEAD, main)
+Author: NickChew <118730370+NickChew@users.noreply.github.com>
+Date:   Tue Feb 7 11:43:27 2023 +0000
+
+    setup
+
+commit c30e8cbcf99ae9be4230a876d957aaf935071b78
+Author: NickChew <118730370+NickChew@users.noreply.github.com>
+Date:   Tue Feb 7 11:37:21 2023 +0000
+
+    setup
+
+:
+commit 238d23008c58d776ab12e5ac394917c10543adad (HEAD -> feature/user, origin/main, origin/feature/database, origin/feature/books
+, origin/HEAD, main)
+Author: NickChew <118730370+NickChew@users.noreply.github.com>
+Date:   Tue Feb 7 11:43:27 2023 +0000
+
+    setup
+
+commit c30e8cbcf99ae9be4230a876d957aaf935071b78
+Author: NickChew <118730370+NickChew@users.noreply.github.com>
+Date:   Tue Feb 7 11:37:21 2023 +0000
+
+    setup
+
+commit ae6c1228638ec069e7f154b085e6cc17b8c6832d
+Author: NickChew <118730370+NickChew@users.noreply.github.com>
+Date:   Tue Feb 7 11:33:04 2023 +0000
+
+    added start to json
+
+commit b37f1455785c77f635e5d5d3eda263d1d62ef1b1
+Author: NickChew <118730370+NickChew@users.noreply.github.com>
+Date:   Tue Feb 7 11:29:27 2023 +0000
+
+    setup
+
+commit 652954f2c414a6683214c36589023c16d19853df
+Author: NickChew <118730370+NickChew@users.noreply.github.com>
+Date:   Tue Feb 7 11:29:02 2023 +0000
+
+    first commit
+(END)
+    added start to json
+
+commit b37f1455785c77f635e5d5d3eda263d1d62ef1b1
+Author: NickChew <118730370+NickChew@users.noreply.github.com>
+Date:   Tue Feb 7 11:29:27 2023 +0000
+
+    setup
+
+commit 652954f2c414a6683214c36589023c16d19853df
+Author: NickChew <118730370+NickChew@users.noreply.github.com>
+Date:   Tue Feb 7 11:29:02 2023 +0000
+
+    first commit
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (feature/user)
+$ git log --oneline --graph
+* 238d230 (HEAD -> feature/user, origin/main, origin/feature/database, origin/feature/books, origin/HEAD, main) setup
+* c30e8cb setup
+* ae6c122 added start to json
+* b37f145 setup
+* 652954f first commit
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (feature/user)
+$ git rebase dev
+Successfully rebased and updated refs/heads/feature/user.
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (feature/user)
+$ git log --oneline --graph
+*   95979f3 (HEAD -> feature/user, origin/dev, dev) Merge pull request #3 from NickChew/feature/user
+|\
+| * 87a5178 (origin/feature/user) Merge pull request #2 from NickChew/user_usermodels_ha
+|/|
+| * ad2cb19 (origin/user_usermodels_ha, user_usermodels_ha) this is Hasan
+|/
+* 238d230 (origin/main, origin/feature/database, origin/feature/books, origin/HEAD, main) setup
+* c30e8cb setup
+* ae6c122 added start to json
+* b37f145 setup
+* 652954f first commit
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (feature/user)
+$ git switch -c user_models_user_ha
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project
+/m44-final-project-be (feature/user)
+$ git switch -c user_models_user_ha                            Switched to a new branch 'user_models_user_ha'
+Switched to a new branch 'user_models_user_ha'
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (user_models_user_ha)
+$ git branch -d user_usermodels_ha
+Deleted branch user_usermodels_ha (was ad2cb19).
+
+Admin@Admin-PC MINGW32 ~/Desktop/code-nations/m44-fanal-project/m44-final-project-be (user_models_user_ha)
+$
