@@ -7,9 +7,9 @@ const bookRouter = Router();
 bookRouter.post("/addBook", addBooks);
 bookRouter.post("/addWishBook", addWishBooks);
 bookRouter.get("/listBooks", listBooks);
-// bookRouter.put("/updateDetails", updateDetails);
 bookRouter.delete("/deleteBook", deleteBooks);
 bookRouter.delete("/deleteWishBook", deleteWishBooks)
+// bookRouter.put("/updateDetails", updateDetails);
 
 module.exports = bookRouter;
 
