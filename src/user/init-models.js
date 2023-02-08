@@ -4,7 +4,6 @@ var _users = require("./userModel");
 function initModels(sequelize) {
   var users = _users(sequelize, DataTypes);
 
-
   return {
     users,
   };
