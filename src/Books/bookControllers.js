@@ -3,12 +3,12 @@ const booksModel = require("./booksModel");
 const users2booksModel = require("./users2booksModel");
 const wishlistModel = require("./wishlistModel");
 
-//Add Book - need to change too add books to user table in database - to be done!
+//Add Book - need to change too add books to user books table in database - to be done!
 exports.addBooks = async (request, response) => {
     console.log(request);
     try {
-        const newBooks = await Books.create(request.body);
-        response.status(200).send({ books: newBooks });
+        const newBooks = await booksModel.create(request.body);
+        response.status(200).send({ booksModel: newBooks });
     } catch (error) {
         console.log(error);
         response.status(500).send({error: error.message});
