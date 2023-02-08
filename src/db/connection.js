@@ -1,13 +1,14 @@
-// require("dotenv").config();
 
+const {Sequelize} = new require("sequelize");
+require ("dotenv").config();
 
+const sequelize = new Sequelize(process.env.MYSQL_URI, {logging: false});
 
-// async function connection() {
-//   try {
-    
-//   } catch (error) {
-    
-//   }
-// };
+try {
+    sequelize.authenticate();
+    console.log("Succesfully connected to DB");
+} catch(error) {
+    console.log(error)
+}
 
-// connection();
+module.exports =sequelize;
