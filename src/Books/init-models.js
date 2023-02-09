@@ -1,7 +1,7 @@
 var DataTypes = require("sequelize").DataTypes;
 var _booksModel = require("./booksModel");
 var _users = require("./users");
-var _users2booksModel = require("./users2booksModel");
+var _users2booksModel = require("./users2booksModel").default;
 var _wishlistModel = require("./wishlistModel");
 
 function initModels(sequelize) {
