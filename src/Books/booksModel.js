@@ -28,4 +28,4 @@ const booksModel = sequelize.define('booksModel', {
     timestamps: false
   });
 
-module.exports = booksModel
+module.exports = booksModel;

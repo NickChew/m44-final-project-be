@@ -7,11 +7,9 @@ const user2WishlistModel = require("./user2WishlistModel");
 
 //Add Book - need to change too add books to user books table in database - to be done!
 //check book is not in db 1st then add, dont if already there.
-
 exports.addBooks = async (request, response) => {
     console.log(request.body);
-    try {
-        
+    try {     
         const checkBookExists = await booksModel.findOne({where:{google_id:request.body.google_id}})
         console.log(checkBookExists);
         if (checkBookExists===null) {
@@ -22,22 +20,18 @@ exports.addBooks = async (request, response) => {
         if (checkBookinLibrary === null) {
             const newUsers_Books = await User2BookModel.create({user_ID:request.body.user_ID, google_ID:request.body.google_id});
             console.log("Already in Library")
-        }
-       
+        } 
         console.log("user2book created");
         // console.log(newUsers_Books);
-
         response.status(200).send("Completed");
-        
     } catch (error) {
         console.log(error);
         response.status(500).send({error: error.message});
     }
-}
+};
 
 //Add Book to wishlist - need to change too add books to wishlist table in database - to be done!
 //check wished book is not in db 1st then add, dont if already there.
-
 exports.addWishBooks = async (request, response) => {
     console.log(request);
     try {
@@ -49,7 +43,7 @@ exports.addWishBooks = async (request, response) => {
         console.log(error);
         response.status(500).send({error: error.message});
     }
-}
+};
 
 //list books in user library   DONE - checked no
 exports.listBooks = async (request, response) => {
@@ -66,6 +60,7 @@ exports.listBooks = async (request, response) => {
         response.status(500).send({error: error.message});
     }
 };
+
 //Wishlist list - following should list all Books in wishlist   DONE - checked no
 exports.listWishBooks = async (request, response) => {
     try {
@@ -80,11 +75,10 @@ exports.listWishBooks = async (request, response) => {
         console.log(error);
         response.status(500).send({error: error.message});
     }
-}
+};
 
 //following should Delete selected book from users database/table - to be done!
 //check book is in db 1st then delete, cant delete Book Not there.
-  
 exports.deleteBooks = async (request, response) => {
     try {
         //request will have userID + bookID,    
@@ -101,10 +95,10 @@ exports.deleteBooks = async (request, response) => {
         console.log(error);
         response.status(500).send({ error: error.message });
     }
-}
+};
+
 //following should delete book from wishlist table/databse - to be done!
 //check book is in db 1st then delete, cant delete Book Not there.
-
 exports.deleteWishBooks = async (request, response) => {
     try {
         //request will have userID + bookID,      
@@ -121,5 +115,5 @@ exports.deleteWishBooks = async (request, response) => {
         console.log(error);
         response.status(500).send({ error: error.message });
     }
-}
+};
 
