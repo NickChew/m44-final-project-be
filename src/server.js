@@ -3,7 +3,7 @@ require("./db/connection");
 const express = require ("express");
 const cors = require ("cors");
 const userRouter = require('./user/userRoutes');
-const bookRouter = require('./Books/BookRoutes');
+const bookRouter = require('./Books/bookRoutes');
 
 
 const app = express();

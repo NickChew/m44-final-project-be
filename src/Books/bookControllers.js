@@ -2,6 +2,7 @@ const users = require("./users");
 const booksModel = require("./booksModel");
 const users2booksModel = require("./users2booksModel");
 const wishlistModel = require("./wishlistModel");
+const user2WishlistModel = require("./user2WishlistModel");
 
 //Add Book - need to change too add books to user books table in database - to be done!
 exports.addBooks = async (request, response) => {
@@ -27,11 +28,31 @@ exports.addWishBooks = async (request, response) => {
     }
 }
 
-//list - change too list users books in database and or list wishList books - to be done!
+//list books in user library - change following to list users books in database 
 exports.listBooks = async (request, response) => {
     try {
-        const books = await booksModel.find({});
-        response.status(218).send({ booksModel: books });
+        let bookDetails = [];
+        const books = await users2booksModel.findall({where:{user_id: request.user.id}});
+        for (let index = 0; index < books.length; index++) {
+            const element = books[index];
+            bookDetails.push(element)
+        }
+        response.status(218).send(bookDetails);
+    } catch (error) {
+        console.log(error);
+        response.status(500).send({error: error.message});
+    }
+};
+//Wishlist list - following should list all Books in wishlist
+exports.listWishBooks = async (request, response) => {
+    try {
+        let wishBookDetails = [];
+        const wishBooks = await user2WishlistModel.findall({where:{user_id: request.user.id}});
+        for (let index = 0; index < wishBooks.length; index++) {
+            const element = books[index];
+            wishBookDetails.push(element)
+        }
+        response.status(218).send(wishBookDetails);
     } catch (error) {
         console.log(error);
         response.status(500).send({error: error.message});
@@ -50,7 +71,7 @@ exports.listBooks = async (request, response) => {
 // };
 
 //following should Delete selected book from users database/table - to be done!
-//  
+  
 exports.deleteBooks = async (request, response) => {
     try {
         const deletedBooks = await booksModel.deleteOne({title: request.body.title});
@@ -66,6 +87,7 @@ exports.deleteBooks = async (request, response) => {
     }
 }
 //following should delete book from wishlist table/databse - to be done!
+
 exports.deleteWishBooks = async (request, response) => {
     try {
         const deletedWishBooks = await wishlistModel.deleteOne({title: request.body.title});
@@ -80,3 +102,4 @@ exports.deleteWishBooks = async (request, response) => {
         response.status(500).send({ error: error.message });
     }
 }
+
