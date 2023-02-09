@@ -1,8 +1,6 @@
 
 const users = require("./Books/users");
-
-const users = require("../user/userModels");
-
+const users = require("../user/userModel");
 const booksModel = require("./booksModel");
 const users2booksModel = require("./users2booksModel");
 const wishlistModel = require("./wishlistModel");
@@ -73,34 +71,23 @@ exports.listWishBooks = async (request, response) => {
         }
         response.status(218).send(wishBookDetails);
 
-        //request will have userID, 
-        //store all this user books info including IDs in JSON then loop through
-        const userBooks = await users2booksModel.find({where: {ID: UserID}});
-        //now loop through user booksID to show all information of this books
-        const UserBooksDetails ={};// store this user books details into object
-        for (let i=0; i< userBooks.length(); i++){
-        const temp = await booksModel.find({where: {ID: userBooks[0].ID}});// find one book each iteration 
-            UserBooksDetails.push(temp);// add it to the returned books object
-        }
+        // //request will have userID, 
+        // //store all this user books info including IDs in JSON then loop through
+        // const userBooks = await users2booksModel.find({where: {ID: UserID}});
+        // //now loop through user booksID to show all information of this books
+        // const UserBooksDetails ={};// store this user books details into object
+        // for (let i=0; i< userBooks.length(); i++){
+        // const temp = await booksModel.find({where: {ID: userBooks[0].ID}});// find one book each iteration 
+        //     UserBooksDetails.push(temp);// add it to the returned books object
+        // }
             
-        response.status(218).send({ booksModel: UserBooksDetails });// return the books detail in JSON to be displaid
+        // response.status(218).send({ booksModel: UserBooksDetails });// return the books detail in JSON to be displaid
 
     } catch (error) {
         console.log(error);
         response.status(500).send({error: error.message});
     }
 }
-
-//dont need this - //Update - Change this to update user details 
-// exports.updateAuthor = async (request, response) => {
-//     try {
-//         await Books.updateOne({title: request.body.title}, {author: request.body.author}),
-//         response.send({msg: `Author updated for ${request.body.title}`});
-//     } catch (error) {
-//         console.log(error);
-//         response.status(401).send({error: error.message});
-//     };
-// };
 
 //following should Delete selected book from users database/table - to be done!
   
@@ -129,7 +116,7 @@ exports.deleteWishBooks = async (request, response) => {
         //request will have userID + bookID, 
         
         //easily delete it from users_wishBooks ER table
-        const deletedBooks = await wishlistModel.deleteOne({userID: request.body.title, userID : request.body.bookID});
+        const deletedWishBooks = await wishlistModel.deleteOne({userID: request.body.title, userID : request.body.bookID});
             
         if (deletedWishBooks.deletedCount > 0) {
             response.status(200).send({ wishlistModel: deletedWishBooks });
