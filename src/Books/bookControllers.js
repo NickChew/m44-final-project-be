@@ -81,10 +81,7 @@ exports.listWishBooks = async (request, response) => {
 //check book is in db 1st then delete, cant delete Book Not there.
 exports.deleteBooks = async (request, response) => {
     try {
-        //request will have userID + bookID,    
-        //easily delete it from users_books ER table
-        const deletedBooks = await users2booksModel.deleteOne({userID: request.body.title, userID : request.body.bookID});
-            
+        const deletedBooks = await User2BookModel.deleteOne({user_ID: request.body.TITLE, user_ID : request.body.google_ID});  
         if (deletedBooks.deletedCount > 0) {
             response.status(200).send({ booksModel: deletedBooks });
         }
@@ -101,10 +98,7 @@ exports.deleteBooks = async (request, response) => {
 //check book is in db 1st then delete, cant delete Book Not there.
 exports.deleteWishBooks = async (request, response) => {
     try {
-        //request will have userID + bookID,      
-        //easily delete it from users_wishBooks ER table
-        const deletedWishBooks = await wishlistModel.deleteOne({userID: request.body.title, userID : request.body.bookID});
-            
+        const deletedWishBooks = await wishlistModel.deleteOne({user_ID: request.body.TITLE, user_ID : request.body.google_ID}); 
         if (deletedWishBooks.deletedCount > 0) {
             response.status(200).send({ wishlistModel: deletedWishBooks });
         }

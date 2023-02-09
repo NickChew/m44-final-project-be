@@ -1,7 +1,7 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require("../db/connection");
 const booksModel = sequelize.define('booksModel', {
-    google_ID: {
+    google_id: {
       type: DataTypes.STRING(12),
       allowNull: false,
       primaryKey: true
