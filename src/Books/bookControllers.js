@@ -45,11 +45,11 @@ exports.addWishBooks = async (request, response) => {
     }
 };
 
-//list books in user library   DONE - checked no
+//list books in user library   not working
 exports.listBooks = async (request, response) => {
     try {
         let bookDetails = [];
-        const books = await users2booksModel.findall({where:{user_id: request.user.id}});
+        const books = await User2BookModel.findall({where:{user_ID: request.user.id}});
         for (let index = 0; index < books.length; index++) {
             const element = books[index];
             bookDetails.push(element)

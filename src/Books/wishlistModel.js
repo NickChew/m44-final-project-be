@@ -6,7 +6,7 @@ const wishlistModel = sequelize.define("wishlistModel", {
       allowNull: false,
       primaryKey: true
     },
-    google_book_ID: {
+    google_ID: {
       type: DataTypes.STRING(11),
       allowNull: false,
       primaryKey: true
