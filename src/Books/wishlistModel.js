@@ -1,6 +1,6 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('wishlistModel', {
+const {DataTypes} = require('sequelize');
+const sequelize = require("../db/connection");
+const wishlistModel = sequelize.define("wishlistModel", {
     user_ID: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -22,10 +22,11 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "user_ID" },
-          { name: "google_book_ID" },
+          { name: "google_ID" },
         ]
       },
     ]
   });
-};
+
+module.exports = wishlistModel;
 

@@ -1,6 +1,6 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('users', {
+const {DataTypes} = require('sequelize');
+const sequelize = require("../db/connection");
+const userModel = sequelize.define("users", {
     ID: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -62,4 +62,5 @@ module.exports = function(sequelize, DataTypes) {
       },
     ]
   });
-};
+
+module.exports = userModel;

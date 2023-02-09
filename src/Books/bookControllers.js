@@ -1,23 +1,34 @@
 
-const users = require("./Books/users");
 const users = require("../user/userModel");
 const booksModel = require("./booksModel");
-const users2booksModel = require("./users2booksModel").default;
+const User2BookModel = require("./users2booksModel");
 const wishlistModel = require("./wishlistModel");
 const user2WishlistModel = require("./user2WishlistModel");
 
 //Add Book - need to change too add books to user books table in database - to be done!
+//check book is not in db 1st then add, dont if already there.
+
 exports.addBooks = async (request, response) => {
-    console.log(request);
+    console.log(request.body);
     try {
-        const newBooks = await booksModel.create(request.body);
-        const newaddBooks = await booksModel.create(request.body.bookID, request.body.title, request.body.authors, request.body.imageURL);
-        //request.body should have userID + all book information + user_books extra info
-        //first add books data to books table
-        const newBooks = await booksModel.create(request.body.bookID, request.body.title, request.body.authors, request.body.imageURL);
-        //second add UserID and bookID into user_books table also add in extra data into this table 
-        const newUsers_Books = await users2booksModel.create(request.body.UserID, request.body.bookID);
-        response.status(200).send({ booksModel: newBooks });
+        
+        const checkBookExists = await booksModel.findOne({where:{google_id:request.body.google_id}})
+        console.log(checkBookExists);
+        if (checkBookExists===null) {
+            const newaddBooks = await booksModel.create({google_id: request.body.google_id, TITLE:request.body.TITLE, AUTHOR:request.body.AUTHOR});            
+            console.log(newaddBooks);          
+        }
+        const checkBookinLibrary = await User2BookModel.findOne({where:{google_id:request.body.google_id, user_ID:request.body.user_ID}})
+        if (checkBookinLibrary === null) {
+            const newUsers_Books = await User2BookModel.create({user_ID:request.body.user_ID, google_ID:request.body.google_id});
+            console.log("Already in Library")
+        }
+       
+        console.log("user2book created");
+        // console.log(newUsers_Books);
+
+        response.status(200).send("Completed");
+        
     } catch (error) {
         console.log(error);
         response.status(500).send({error: error.message});
@@ -25,11 +36,14 @@ exports.addBooks = async (request, response) => {
 }
 
 //Add Book to wishlist - need to change too add books to wishlist table in database - to be done!
+//check wished book is not in db 1st then add, dont if already there.
+
 exports.addWishBooks = async (request, response) => {
     console.log(request);
     try {
-        const newBooks = await booksModel.create(request.body.bookID, request.body.title, request.body.authors, request.body.imageURL);
-        const newWishBooks = await user2WishlistModel.create(newBooks);
+        const checkWishbookexists = await user2WishlistModel.find({where:{google_id:request.google_id}})
+        const newaddwishBooks = await user2WishlistModel.create(request.body.google_id, request.body.title, request.body.authors, request.body.imageURL);
+        // const newaddWishBooks = await user2WishlistModel.create(newBooks);
         response.status(200).send({ wishlistModel: newWishBooks });
     } catch (error) {
         console.log(error);
@@ -37,7 +51,7 @@ exports.addWishBooks = async (request, response) => {
     }
 }
 
-//list books in user library - change following to list users books in database 
+//list books in user library   DONE - checked no
 exports.listBooks = async (request, response) => {
     try {
         let bookDetails = [];
@@ -52,7 +66,7 @@ exports.listBooks = async (request, response) => {
         response.status(500).send({error: error.message});
     }
 };
-//Wishlist list - following should list all Books in wishlist
+//Wishlist list - following should list all Books in wishlist   DONE - checked no
 exports.listWishBooks = async (request, response) => {
     try {
         let wishBookDetails = [];
@@ -62,18 +76,6 @@ exports.listWishBooks = async (request, response) => {
             wishBookDetails.push(element)
         }
         response.status(218).send(wishBookDetails);
-
-        // //request will have userID, 
-        // //store all this user books info including IDs in JSON then loop through
-        // const userBooks = await users2booksModel.find({where: {ID: UserID}});
-        // //now loop through user booksID to show all information of this books
-        // const UserBooksDetails ={};// store this user books details into object
-        // for (let i=0; i< userBooks.length(); i++){
-        // const temp = await booksModel.find({where: {ID: userBooks[0].ID}});// find one book each iteration 
-        //     UserBooksDetails.push(temp);// add it to the returned books object
-        // } 
-        // response.status(218).send({ booksModel: UserBooksDetails });// return the books detail in JSON to be displaid
-
     } catch (error) {
         console.log(error);
         response.status(500).send({error: error.message});
@@ -81,6 +83,7 @@ exports.listWishBooks = async (request, response) => {
 }
 
 //following should Delete selected book from users database/table - to be done!
+//check book is in db 1st then delete, cant delete Book Not there.
   
 exports.deleteBooks = async (request, response) => {
     try {
@@ -100,6 +103,7 @@ exports.deleteBooks = async (request, response) => {
     }
 }
 //following should delete book from wishlist table/databse - to be done!
+//check book is in db 1st then delete, cant delete Book Not there.
 
 exports.deleteWishBooks = async (request, response) => {
     try {

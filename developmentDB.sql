@@ -8,12 +8,13 @@ create table users(
     PRIMARY KEY(ID)
     );
 SHOW TABLES;
-SELECT * from users;
+SELECT * from booksModel;
+DESCRIBE booksModel; 
 commit; 
-DROP table users2books;
+DROP table booksModel; -- deletes table
 
 CREATE TABLE booksModel (
-                    google_id VARCHAR(11) unique primary key not null,
+                    google_id VARCHAR(12) unique primary key not null,
                     ISBN_10 DECIMAL(10,0),
                     ISBN_13 DECIMAL(13,0),
                     AUTHOR VARCHAR(255) NOT NULL,
@@ -22,13 +23,19 @@ CREATE TABLE booksModel (
 
 CREATE TABLE users2booksModel (
                     user_ID INT NOT NULL,
-                    google_book_ID VARCHAR(11) NOT NULL,
+                    google_ID VARCHAR(11) NOT NULL,
                     PRIMARY KEY (user_ID, google_book_ID)
                     );
+                    
+CREATE TABLE user2WishlistModel (
+                    user_ID INT NOT NULL,
+                    google_ID VARCHAR(11) NOT NULL,
+                    PRIMARY KEY (user_ID, google_book_ID)
+                    );                    
 
 CREATE TABLE wishlistModel (
                     user_ID int not null,
-                    google_book_ID VARCHAR(11) not null,
+                    google_ID VARCHAR(11) not null,
                     PRIMARY KEY (user_ID, google_book_ID)
                     );
 				

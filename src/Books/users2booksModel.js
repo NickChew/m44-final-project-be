@@ -1,12 +1,12 @@
-import Sequelize from 'sequelize';
-export default function(sequelize, DataTypes) {
-  return sequelize.define('users2booksModel', {
+const {DataTypes} = require('sequelize');
+const sequelize = require("../db/connection");
+const User2BookModel = sequelize.define("User2BookModel", {
     user_ID: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    google_book_ID: {
+    google_ID: {
       type: DataTypes.STRING(11),
       allowNull: false,
       primaryKey: true
@@ -22,10 +22,11 @@ export default function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "user_ID" },
-          { name: "google_book_ID" },
+          { name: "google_ID" },
         ]
       },
     ]
   });
-};
+
+module.exports = User2BookModel;
 

@@ -1,5 +1,4 @@
 const users = require("./userModel");
-
 const jwt = require("jsonwebtoken");
 
 exports.createUser = async (request, response) => {
@@ -15,7 +14,7 @@ exports.createUser = async (request, response) => {
 
 exports.listUsers = async (request,response) => {
   try {
-    const Users = await users.find({});
+    const users = await users.find({});
     response.status(218).send({Users: users});
   } catch (error) {
     console.log(error);
@@ -36,10 +35,10 @@ exports.login = async (request,response) => {
 exports.updatedEmail = async (request,response) => {
   try {
     //code with update/replace user email goes here
-    const updatedUser = await users.updateOne(
+    const updatedEmail = await users.updateOne(
       {username: request.body.username}, {email: request.body.email}
     );
-  response.status(200).send({message:"Success",updatedUser})
+  response.status(200).send({message:"Success",updatedEmail})
   } catch (error) {
     console.log(error);
     response.status(500).send({error: error.message})

@@ -1,8 +1,8 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('booksModel', {
+const {DataTypes} = require('sequelize');
+const sequelize = require("../db/connection");
+const booksModel = sequelize.define('booksModel', {
     google_id: {
-      type: DataTypes.STRING(11),
+      type: DataTypes.STRING(12),
       allowNull: false,
       primaryKey: true
     },
@@ -27,5 +27,5 @@ module.exports = function(sequelize, DataTypes) {
     tableName: 'booksModel',
     timestamps: false
   });
-};
 
+module.exports = booksModel

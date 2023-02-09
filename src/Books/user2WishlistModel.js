@@ -1,12 +1,12 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('user2WishlistModel', {
+const {DataTypes} = require('sequelize');
+const sequelize = require("../db/connection");
+const user2WishlistModel = sequelize.define("user2WishlistModel",{
     user_ID: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    google_book_ID: {
+    google_ID: {
       type: DataTypes.STRING(11),
       allowNull: false,
       primaryKey: true
@@ -22,10 +22,11 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "user_ID" },
-          { name: "google_book_ID" },
+          { name: "google_ID" },
         ]
       },
     ]
   });
-};
+
+  module.exports = user2WishlistModel;
 
