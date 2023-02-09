@@ -1,4 +1,4 @@
-const users = require("./users");
+const users = require("./Books/users");
 const booksModel = require("./booksModel");
 const users2booksModel = require("./users2booksModel");
 const wishlistModel = require("./wishlistModel");
@@ -9,6 +9,9 @@ exports.addBooks = async (request, response) => {
     console.log(request);
     try {
         const newBooks = await booksModel.create(request.body);
+        const newaddBooks = await booksModel.create(request.body.bookID, request.body.title, request.body.authors, request.body.imageURL);
+        //second add UserID and bookID into user_books table also add in extra data into this table 
+        const newUsers_Books = await users2booksModel.create(request.body.UserID, request.body.bookID);
         response.status(200).send({ booksModel: newBooks });
     } catch (error) {
         console.log(error);
