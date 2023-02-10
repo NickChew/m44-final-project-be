@@ -8,19 +8,22 @@ const user2WishlistModel = require("./user2WishlistModel");
 //Add Book - need to change too add books to user books table in database - to be done!
 //check book is not in db 1st then add, dont if already there.
 exports.addBooks = async (request, response) => {
-    console.log(request.body);
+    // console.log(request.body);
     try {     
-        const checkBookExists = await booksModel.findOne({where:{google_id:request.body.google_id}})
-        console.log(checkBookExists);
+        const checkBookExists = await booksModel.findOne({where:{google_ID:request.body.google_ID}})
+        // console.log(checkBookExists);
         if (checkBookExists===null) {
-            const newaddBooks = await booksModel.create({google_id: request.body.google_id, TITLE:request.body.TITLE, AUTHOR:request.body.AUTHOR});            
-            console.log(newaddBooks);          
-        }
-        const checkBookinLibrary = await User2BookModel.findOne({where:{google_id:request.body.google_id, user_ID:request.body.user_ID}})
+            const newaddBooks = await booksModel.create({google_ID: request.body.google_ID, ISBN:request.body.ISBN, title:request.body.title, author:request.body.author, thumbnail:request.body.thumbnail, description:request.body.description, category:request.body.category, selflink:request.body.selflink, publishDate:request.body.publishDate}); 
+        } else {
+            console.log("Book already exists");
+        }                               
+        const checkBookinLibrary = await User2BookModel.findOne({where:{google_ID:request.body.google_ID, user_ID:request.body.user_ID}})
         if (checkBookinLibrary === null) {
-            const newUsers_Books = await User2BookModel.create({user_ID:request.body.user_ID, google_ID:request.body.google_id});
-            console.log("Already in Library")
+            const newUsers_Books = await User2BookModel.create({user_ID:request.body.user_ID, google_ID:request.body.google_ID});        
         } 
+        else {
+            console.log("Already in Library")
+        }
         console.log("user2book created");
         // console.log(newUsers_Books);
         response.status(200).send("Completed");
@@ -33,25 +36,41 @@ exports.addBooks = async (request, response) => {
 //Add Book to wishlist - need to change too add books to wishlist table in database - to be done!
 //check wished book is not in db 1st then add, dont if already there.
 exports.addWishBooks = async (request, response) => {
-    console.log(request);
-    try {
-        const checkWishbookexists = await user2WishlistModel.find({where:{google_id:request.google_id}})
-        const newaddwishBooks = await user2WishlistModel.create(request.body.google_id, request.body.title, request.body.authors, request.body.imageURL);
-        // const newaddWishBooks = await user2WishlistModel.create(newBooks);
-        response.status(200).send({ wishlistModel: newWishBooks });
+    // console.log(request);
+    try {     
+        const checkBookExists = await booksModel.findOne({where:{google_ID:request.body.google_ID}})
+        // console.log(checkBookExists);
+        if (checkBookExists===null) {
+            const newaddBooks = await booksModel.create({google_ID: request.body.google_ID, ISBN:request.body.ISBN, title:request.body.title, author:request.body.author, thumbnail:request.body.thumbnail, description:request.body.description, category:request.body.category, selflink:request.body.selflink, publishDate:request.body.publishDate}); 
+        } else {
+            console.log("Book already exists");
+        }                               
+        const checkBookinWishlist = await user2WishlistModel.findOne({where:{google_ID:request.body.google_ID, user_ID:request.body.user_ID}})
+        if (checkBookinWishlist === null) {
+            const newUsers_Books = await user2WishlistModel.create({user_ID:request.body.user_ID, google_ID:request.body.google_ID});        
+        } 
+        else {
+            console.log("Already in WishList")
+        }
+        console.log("user2book created");
+        // console.log(newUsers_Books);
+        response.status(200).send("Completed");
     } catch (error) {
         console.log(error);
         response.status(500).send({error: error.message});
     }
 };
 
-//list books in user library   not working
+//list books in user library 
 exports.listBooks = async (request, response) => {
     try {
         let bookDetails = [];
-        const books = await User2BookModel.findall({where:{user_ID: request.user.id}});
+        const books = await User2BookModel.findAll({where:{user_ID: request.body.user_ID}});
+        // console.log("books object",books[0].dataValues.google_ID);
         for (let index = 0; index < books.length; index++) {
-            const element = books[index];
+            // console.log(books[index].dataValues.google_ID)
+            const element = await booksModel.findOne({where:{google_ID:books[index].dataValues.google_ID}});
+            // console.log(element);
             bookDetails.push(element)
         }
         response.status(218).send(bookDetails);
@@ -61,16 +80,19 @@ exports.listBooks = async (request, response) => {
     }
 };
 
-//Wishlist list - following should list all Books in wishlist   DONE - checked no
+//Wishlist list - following should list all Books in wishlist
 exports.listWishBooks = async (request, response) => {
     try {
-        let wishBookDetails = [];
-        const wishBooks = await user2WishlistModel.findall({where:{user_id: request.user.id}});
-        for (let index = 0; index < wishBooks.length; index++) {
-            const element = wishBooks[index];
-            wishBookDetails.push(element)
+        let bookDetails = [];
+        const books = await user2WishlistModel.findAll({where:{user_ID: request.body.user_ID}});
+        console.log("books object",books[0].dataValues.google_ID);
+        for (let index = 0; index < books.length; index++) {
+            console.log(books[index].dataValues.google_ID)
+            const element = await booksModel.findOne({where:{google_ID:books[index].dataValues.google_ID}});
+            console.log(element);
+            bookDetails.push(element)
         }
-        response.status(218).send(wishBookDetails);
+        response.status(218).send(bookDetails);
     } catch (error) {
         console.log(error);
         response.status(500).send({error: error.message});
