@@ -2,7 +2,7 @@
 const {Sequelize} = new require("sequelize");
 require ("dotenv").config();
 
-const sequelize = new Sequelize(process.env.MYSQL_URI, {logging: false});
+const sequelize = new Sequelize(process.env.SQL_URI, {logging: false});
 
 try {
     sequelize.authenticate();
@@ -11,4 +11,4 @@ try {
     console.log(error)
 }
 
-module.exports =sequelize;
+module.exports = sequelize;

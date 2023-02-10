@@ -1,6 +1,6 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require("../db/connection");
-const User2BookModel = sequelize.define("User2BookModel", {
+const user2WishlistModel = sequelize.define("user2WishlistModel",{
   user_ID: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -13,7 +13,7 @@ const User2BookModel = sequelize.define("User2BookModel", {
   }
 }, {
   sequelize,
-  tableName: 'users2booksModel',
+  tableName: 'user2WishlistModel',
   timestamps: false,
   indexes: [
     {
@@ -28,5 +28,5 @@ const User2BookModel = sequelize.define("User2BookModel", {
   ]
 });
 
-module.exports = User2BookModel;
+  module.exports = user2WishlistModel;
 

@@ -1,19 +1,19 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('wishlistModel', {
+  return sequelize.define('users2booksModel', {
     user_ID: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    google_book_ID: {
-      type: DataTypes.STRING(11),
+    google_ID: {
+      type: DataTypes.STRING(12),
       allowNull: false,
       primaryKey: true
     }
   }, {
     sequelize,
-    tableName: 'wishlistModel',
+    tableName: 'users2booksModel',
     timestamps: false,
     indexes: [
       {
@@ -22,10 +22,9 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "user_ID" },
-          { name: "google_book_ID" },
+          { name: "google_ID" },
         ]
       },
     ]
   });
 };
-

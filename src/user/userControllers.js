@@ -1,9 +1,9 @@
-const User = require("./userModel");
+const users = require("./userModel");
 const jwt = require("jsonwebtoken");
 
 exports.createUser = async (request, response) => {
   try {
-    const newUser = await User.create(request.body);
+    const newUser = await users.create(request.body);
     const token = jwt.sign({_id: newUser._id}, process.env.SECRET_KEY);//creates the token using the secret key
     response.status(201).send({msg: "createUser has created the following token", token});
   } catch (error) {
@@ -14,8 +14,8 @@ exports.createUser = async (request, response) => {
 
 exports.listUsers = async (request,response) => {
   try {
-    const users = await User.find({});
-    response.status(218).send({user: users});
+    const users = await users.find({});
+    response.status(218).send({Users: users});
   } catch (error) {
     console.log(error);
     response.status(500).send({error: error.message});
@@ -24,8 +24,8 @@ exports.listUsers = async (request,response) => {
 
 exports.login = async (request,response) => {
   try {
-    const token = jwt.sign({_id: request.user._id},process.env.SECRET_KEY);
-    response.send({user: request.user.username, token});
+    const token = jwt.sign({_id: request.users._id},process.env.SECRET_KEY);
+    response.send({users: request.users.username, token});
   } catch (error) {
     console.log(error);
     response.status(401).send({error: error.message})
@@ -35,10 +35,10 @@ exports.login = async (request,response) => {
 exports.updatedEmail = async (request,response) => {
   try {
     //code with update/replace user email goes here
-    const updatedUser = await User.updateOne(
+    const updatedEmail = await users.updateOne(
       {username: request.body.username}, {email: request.body.email}
     );
-  response.status(200).send({message:"Success",updatedUser})
+  response.status(200).send({message:"Success",updatedEmail})
   } catch (error) {
     console.log(error);
     response.status(500).send({error: error.message})
@@ -47,7 +47,7 @@ exports.updatedEmail = async (request,response) => {
 
 exports.deleteUser = async (request,response) => {
   try {
-    const delUser = await User.deleteOne(
+    const delUser = await users.deleteOne(
       {username: request.body.username}
     ); 
   response.status(200).send({message:"Deleted",delUser})

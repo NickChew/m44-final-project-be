@@ -7,7 +7,7 @@ const userRouter = Router();
 userRouter.get("/listUser", tokenCheck, listUsers);
 userRouter.post("/addUser", hashPass, createUser);
 userRouter.post("/login", comparePass, login);  //gets token etc
-userRouter.put("/update", comparePass, updateEmail);
+userRouter.put("/update", comparePass, updatedEmail);
 userRouter.delete("/deleteUser", comparePass, deleteUser);
 userRouter.get("/authCheck", tokenCheck, login);
 
