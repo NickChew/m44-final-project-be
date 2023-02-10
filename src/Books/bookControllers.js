@@ -2,7 +2,6 @@
 const users = require("../user/userModel");
 const booksModel = require("./booksModel");
 const User2BookModel = require("./users2booksModel");
-const wishlistModel = require("./wishlistModel");
 const user2WishlistModel = require("./user2WishlistModel");
 
 //Add Book - need to change too add books to user books table in database - to be done!
@@ -85,11 +84,11 @@ exports.listWishBooks = async (request, response) => {
     try {
         let bookDetails = [];
         const books = await user2WishlistModel.findAll({where:{user_ID: request.body.user_ID}});
-        console.log("books object",books[0].dataValues.google_ID);
+        // console.log("books object",books[0].dataValues.google_ID);
         for (let index = 0; index < books.length; index++) {
             console.log(books[index].dataValues.google_ID)
             const element = await booksModel.findOne({where:{google_ID:books[index].dataValues.google_ID}});
-            console.log(element);
+            // console.log(element);
             bookDetails.push(element)
         }
         response.status(218).send(bookDetails);
@@ -103,9 +102,10 @@ exports.listWishBooks = async (request, response) => {
 //check book is in db 1st then delete, cant delete Book Not there.
 exports.deleteBooks = async (request, response) => {
     try {
-        const deletedBooks = await User2BookModel.deleteOne({user_ID: request.body.TITLE, user_ID : request.body.google_ID});  
-        if (deletedBooks.deletedCount > 0) {
-            response.status(200).send({ booksModel: deletedBooks });
+        const deletedBook = await User2BookModel.destroy({where: {user_ID: request.body.user_ID, google_ID : request.body.google_ID}});  
+        console.log(deletedBook);
+        if (deletedBook > 0) {
+            response.status(200).send("book Deleted");
         }
         else {
             throw new Error("Did not delete.");
@@ -120,9 +120,9 @@ exports.deleteBooks = async (request, response) => {
 //check book is in db 1st then delete, cant delete Book Not there.
 exports.deleteWishBooks = async (request, response) => {
     try {
-        const deletedWishBooks = await wishlistModel.deleteOne({user_ID: request.body.TITLE, user_ID : request.body.google_ID}); 
-        if (deletedWishBooks.deletedCount > 0) {
-            response.status(200).send({ wishlistModel: deletedWishBooks });
+        const deletedWishBook = await user2WishlistModel.destroy({where: {user_ID: request.body.user_ID, google_ID : request.body.google_ID}}); 
+        if (deletedWishBook > 0) {
+            response.status(200).send("book Deleted from Wishlist");
         }
         else {
             throw new Error("Did not delete.");
