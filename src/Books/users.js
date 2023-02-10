@@ -15,11 +15,13 @@ const users = sequelize.define("users", {
     email: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      unique: "email"
+      unique: "email",
+      match: /^\S+@\S+$/
     },
     password: {
       type: DataTypes.STRING(64),
-      allowNull: false
+      allowNull: false,
+      match: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
     }
   }, {
     sequelize,
