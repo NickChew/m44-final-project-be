@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 exports.createUser = async (request, response) => {
   try {
     const newUser = await users.create(request.body);
-    const token = jwt.sign({_id: newUser._id}, process.env.SECRET_KEY);//creates the token using the secret key
+    const token = jwt.sign({user_ID: newUser.user_ID}, process.env.SECRET_KEY);//creates the token using the secret key
     response.status(201).send({msg: "createUser has created the following token", token});
   } catch (error) {
     console.log(error);
@@ -24,7 +24,7 @@ exports.listUsers = async (request,response) => {
 
 exports.login = async (request,response) => {
   try {
-    const token = jwt.sign({_id: request.users._id},process.env.SECRET_KEY);
+    const token = jwt.sign({user_ID: request.users.user_ID},process.env.SECRET_KEY);
     response.send({users: request.users.username, token});
   } catch (error) {
     console.log(error);
