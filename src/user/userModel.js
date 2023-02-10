@@ -1,7 +1,7 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('users', {
-    user_ID: {
+const {DataTypes} = require('sequelize');
+const sequelize = require("../db/connection");
+const users = sequelize.define("users", {
+    ID: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -33,15 +33,15 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "user_ID" },
+          { name: "ID" },
         ]
       },
       {
-        name: "user_ID",
+        name: "ID",
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "user_ID" },
+          { name: "ID" },
         ]
       },
       {
@@ -62,4 +62,5 @@ module.exports = function(sequelize, DataTypes) {
       },
     ]
   });
-};
+
+module.exports = users;

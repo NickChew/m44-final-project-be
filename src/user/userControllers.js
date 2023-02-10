@@ -14,7 +14,7 @@ exports.createUser = async (request, response) => {
 
 exports.listUsers = async (request,response) => {
   try {
-    const users = await users.find({});
+    const users = await users.findAll({});
     response.status(218).send({Users: users});
   } catch (error) {
     console.log(error);
@@ -47,9 +47,7 @@ exports.updatedEmail = async (request,response) => {
 
 exports.deleteUser = async (request,response) => {
   try {
-    const delUser = await users.deleteOne(
-      {username: request.body.username}
-    ); 
+    const delUser = await users.destroy({username: request.body.username}); 
   response.status(200).send({message:"Deleted",delUser})
   } catch (error) {
     console.log(error);
