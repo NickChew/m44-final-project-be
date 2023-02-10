@@ -1,0 +1,8 @@
+npm i express
+npm i dotenv 
+npm i bcrypt
+npm i jsonwebtoken
+npm i cors 
+npm i mysql2 
+npm i sequelize
+npm i sequelize-auto
