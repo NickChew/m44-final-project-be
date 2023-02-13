@@ -17,6 +17,15 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "mysql2": "^3.1.1",
-    "sequelize": "^6.28.0"
-  }
+    "sequelize": "^6.28.0",
+    "sequelize-auto": "^0.8.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NickChew/m44-final-project-be.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NickChew/m44-final-project-be/issues"
+  },
+  "homepage": "https://github.com/NickChew/m44-final-project-be#readme"
 }
