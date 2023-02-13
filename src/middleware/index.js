@@ -22,7 +22,7 @@ exports.hashPass = async (request,response,next) => {
 exports.comparePass = async (request,response,next) => {
   try {
     // console.log(request.body);
-    request.user = await User.findOne({userName: request.body.userName});
+    request.user = await User.findOne({where:{userName: request.body.userName}});
     // console.log(request.user);
     // console.log(request.body);
     //This pulls the user info from the databse including the hashed password

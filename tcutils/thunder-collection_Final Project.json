@@ -1,0 +1,32 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Final Project",
+    "dateExported": "2023-02-13T17:55:21.967Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "e2b2b6cd-3dd1-433d-b033-d4859c6de6b0",
+            "colId": "c0329287-d44f-48a8-9aac-b389bb1965fc",
+            "containerId": "",
+            "name": "http://localhost:80/updateEmail",
+            "url": "http://localhost:80/updateEmail",
+            "method": "PUT",
+            "sortNum": 10000,
+            "created": "2023-02-13T17:55:11.750Z",
+            "modified": "2023-02-13T17:55:11.750Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Q5NDQ0ZTY0M2MxM2JkMjllNTFlNzgiLCJpYXQiOjE2NzUxODMxODJ9.PYvymX9FFZMD94e3VXohgIDNw6uhVx8WoG_OQAMgCbc"
+                }
+            ],
+            "params": [],
+            "tests": []
+        }
+    ]
+}

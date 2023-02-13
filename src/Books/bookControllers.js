@@ -57,10 +57,8 @@ exports.addWishBooks = async (request, response) => {
 //list books in user library 
 exports.listBooks = async (request, response) => {
     try {
-        // const querystring = document.location.search
-        const URLParamaters = new URLSearchParams(URL)
-        // console.log(URLParams);
-        const user_ID = URLParamaters.get("userID")
+        console.log(request.user.user_ID)
+        const user_ID = request.user.user_ID
         console.log(user_ID);
         let bookDetails = [];
         const books = await User2BookModel.findAll({where:{user_ID: user_ID}});
@@ -78,8 +76,9 @@ exports.listBooks = async (request, response) => {
 //Wishlist list - following should list all Books in wishlist
 exports.listWishBooks = async (request, response) => {
     try {
+        const user_ID = request.user.user_ID
         let bookDetails = [];
-        const books = await user2WishlistModel.findAll({where:{user_ID: request.body.user_ID}});
+        const books = await user2WishlistModel.findAll({where:{user_ID: user_ID}});
         for (let index = 0; index < books.length; index++) {
             console.log(books[index].dataValues.google_ID)
             const element = await booksModel.findOne({where:{google_ID:books[index].dataValues.google_ID}});
