@@ -21,6 +21,22 @@ exports.listUsers = async (request,response) => {
     response.status(500).send({error: error.message});
   };
 };
+// exports.listUsers = async (request,response) => {
+//   try {
+//     let userDetails = [];
+//     const users = await userModel.findAll({where:{ID: _ID}});
+//     for (let index = 0; index < users.length; index++) {
+//       const element = await userModel.findOne({where:{google_ID:users[index].dataValues.google_ID}});
+//       bookDetails.push(element);
+//     }
+//     response.status(218).send(bookDetails);
+//   } catch (error) {
+//     console.log(error);
+//     response.status(500).send({error: error.message});
+//   };
+// };
+    
+
 
 exports.login = async (request,response) => {
   try {
@@ -34,9 +50,9 @@ exports.login = async (request,response) => {
 
 exports.updatedEmail = async (request,response) => {
   try {
-    //code with update/replace user email goes here
-    const updatedEmail = await users.updateOne(
-      {username: request.body.username}, {email: request.body.email}
+    //code with update/replace user email goes here updateOne equivilent in sequelize
+    const updatedEmail = await users.update(
+      {username: request.body.username}, {where: {email: request.body.email}}
     );
   response.status(200).send({message:"Success",updatedEmail})
   } catch (error) {
