@@ -24,8 +24,10 @@ exports.listUsers = async (request,response) => {
 
 exports.login = async (request,response) => {
   try {
-    const token = jwt.sign({user_ID: request.users.user_ID},process.env.SECRET_KEY);
-    response.send({users: request.users.userName, token});
+    const getuser = await users.findOne({where: {userName: request.body.userName}});
+    const getuserID = getuser.user_ID
+    const token = jwt.sign({user_ID: getuserID},process.env.SECRET_KEY);
+    response.send({token: token});
   } catch (error) {
     console.log(error);
     response.status(401).send({error: error.message})
