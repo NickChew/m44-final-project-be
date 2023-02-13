@@ -10,8 +10,6 @@ function initModels(sequelize) {
   var users = _users(sequelize, DataTypes);
   var users2booksModel = _users2booksModel(sequelize, DataTypes);
 
-
-
   return {
     booksModel,
     user2WishlistModel,

@@ -13,6 +13,7 @@ const port = process.env.PORT  || 5001;
 app.use(cors());
 app.use(express.json());
 app.use(bookRouter);
+app.use(userRouter);
 
 app.get("/health",(req,res)=>{
   res.status(200).json({message:"API is Working!"})
