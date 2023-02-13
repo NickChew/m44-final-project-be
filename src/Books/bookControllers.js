@@ -1,16 +1,15 @@
-
+const URL=require("url").URL
 const users = require("../user/userModel");
 const booksModel = require("./booksModel");
 const User2BookModel = require("./users2booksModel");
 const user2WishlistModel = require("./user2WishlistModel");
+const QueryString = require("qs");
 
 //Add Book - need to change too add books to user books table in database - to be done!
 //check book is not in db 1st then add, dont if already there.
 exports.addBooks = async (request, response) => {
-    // console.log(request.body);
     try {     
         const checkBookExists = await booksModel.findOne({where:{google_ID:request.body.google_ID}})
-        // console.log(checkBookExists);
         if (checkBookExists===null) {
             const newaddBooks = await booksModel.create({google_ID: request.body.google_ID, ISBN:request.body.ISBN, title:request.body.title, author:request.body.author, thumbnail:request.body.thumbnail, description:request.body.description, category:request.body.category, selflink:request.body.selflink, publishDate:request.body.publishDate}); 
         } else {
@@ -24,7 +23,6 @@ exports.addBooks = async (request, response) => {
             console.log("Already in Library")
         }
         console.log("user2book created");
-        // console.log(newUsers_Books);
         response.status(200).send("Completed");
     } catch (error) {
         console.log(error);
@@ -32,13 +30,10 @@ exports.addBooks = async (request, response) => {
     }
 };
 
-//Add Book to wishlist - need to change too add books to wishlist table in database - to be done!
-//check wished book is not in db 1st then add, dont if already there.
+//Add Book to wishlist - check wished book is not in db 1st then add, dont if already there.
 exports.addWishBooks = async (request, response) => {
-    // console.log(request);
     try {     
         const checkBookExists = await booksModel.findOne({where:{google_ID:request.body.google_ID}})
-        // console.log(checkBookExists);
         if (checkBookExists===null) {
             const newaddBooks = await booksModel.create({google_ID: request.body.google_ID, ISBN:request.body.ISBN, title:request.body.title, author:request.body.author, thumbnail:request.body.thumbnail, description:request.body.description, category:request.body.category, selflink:request.body.selflink, publishDate:request.body.publishDate}); 
         } else {
@@ -52,7 +47,6 @@ exports.addWishBooks = async (request, response) => {
             console.log("Already in WishList")
         }
         console.log("user2book created");
-        // console.log(newUsers_Books);
         response.status(200).send("Completed");
     } catch (error) {
         console.log(error);
@@ -63,13 +57,15 @@ exports.addWishBooks = async (request, response) => {
 //list books in user library 
 exports.listBooks = async (request, response) => {
     try {
+        // const querystring = document.location.search
+        const URLParamaters = new URLSearchParams(URL)
+        // console.log(URLParams);
+        const user_ID = URLParamaters.get("userID")
+        console.log(user_ID);
         let bookDetails = [];
-        const books = await User2BookModel.findAll({where:{user_ID: request.body.user_ID}});
-        // console.log("books object",books[0].dataValues.google_ID);
+        const books = await User2BookModel.findAll({where:{user_ID: user_ID}});
         for (let index = 0; index < books.length; index++) {
-            // console.log(books[index].dataValues.google_ID)
             const element = await booksModel.findOne({where:{google_ID:books[index].dataValues.google_ID}});
-            // console.log(element);
             bookDetails.push(element)
         }
         response.status(218).send(bookDetails);
@@ -84,11 +80,9 @@ exports.listWishBooks = async (request, response) => {
     try {
         let bookDetails = [];
         const books = await user2WishlistModel.findAll({where:{user_ID: request.body.user_ID}});
-        // console.log("books object",books[0].dataValues.google_ID);
         for (let index = 0; index < books.length; index++) {
             console.log(books[index].dataValues.google_ID)
             const element = await booksModel.findOne({where:{google_ID:books[index].dataValues.google_ID}});
-            // console.log(element);
             bookDetails.push(element)
         }
         response.status(218).send(bookDetails);
@@ -103,7 +97,6 @@ exports.listWishBooks = async (request, response) => {
 exports.deleteBooks = async (request, response) => {
     try {
         const deletedBook = await User2BookModel.destroy({where: {user_ID: request.body.user_ID, google_ID : request.body.google_ID}});  
-        console.log(deletedBook);
         if (deletedBook > 0) {
             response.status(200).send("book Deleted");
         }
