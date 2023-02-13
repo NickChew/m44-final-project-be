@@ -1,6 +1,6 @@
-const sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('booksModel', {
+const {DataTypes} = require('sequelize');
+const sequelize = require("../db/connection");
+const booksModel = sequelize.define("booksModel",{
   google_ID: {
     type: DataTypes.STRING(12),
     allowNull: false,
@@ -61,5 +61,6 @@ module.exports = function(sequelize, DataTypes) {
     },
   ]
 });
-}
+
+module.exports = booksModel;
 
