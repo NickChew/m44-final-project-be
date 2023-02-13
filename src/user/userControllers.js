@@ -14,34 +14,18 @@ exports.createUser = async (request, response) => {
 
 exports.listUsers = async (request,response) => {
   try {
-    const users = await users.findAll({});
-    response.status(218).send({Users: users});
+    const tempusers = await users.findAll({});
+    response.status(218).send({Users: tempusers});
   } catch (error) {
     console.log(error);
     response.status(500).send({error: error.message});
   };
 };
-// exports.listUsers = async (request,response) => {
-//   try {
-//     let userDetails = [];
-//     const users = await userModel.findAll({where:{ID: _ID}});
-//     for (let index = 0; index < users.length; index++) {
-//       const element = await userModel.findOne({where:{google_ID:users[index].dataValues.google_ID}});
-//       bookDetails.push(element);
-//     }
-//     response.status(218).send(bookDetails);
-//   } catch (error) {
-//     console.log(error);
-//     response.status(500).send({error: error.message});
-//   };
-// };
-    
-
 
 exports.login = async (request,response) => {
   try {
     const token = jwt.sign({user_ID: request.users.user_ID},process.env.SECRET_KEY);
-    response.send({users: request.users.username, token});
+    response.send({users: request.users.userName, token});
   } catch (error) {
     console.log(error);
     response.status(401).send({error: error.message})
@@ -52,7 +36,7 @@ exports.updatedEmail = async (request,response) => {
   try {
     //code with update/replace user email goes here updateOne equivilent in sequelize
     const updatedEmail = await users.update(
-      {username: request.body.username}, {where: {email: request.body.email}}
+      {email: request.body.email}, {where: {userName: request.body.userName}}
     );
   response.status(200).send({message:"Success",updatedEmail})
   } catch (error) {
@@ -63,7 +47,7 @@ exports.updatedEmail = async (request,response) => {
 
 exports.deleteUser = async (request,response) => {
   try {
-    const delUser = await users.destroy({username: request.body.username}); 
+    const delUser = await users.destroy({where: {userName: request.body.userName}}); 
   response.status(200).send({message:"Deleted",delUser})
   } catch (error) {
     console.log(error);
