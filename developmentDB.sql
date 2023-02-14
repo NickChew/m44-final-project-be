@@ -1,13 +1,5 @@
 use bujikvlrqmfk8m2mdjst;
-DROP table users;
-CREATE TABLE users(
-	user_ID INT NOT NULL UNIQUE AUTO_INCREMENT,
-    userName VARCHAR(255) NOT NULL UNIQUE,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(64) NOT NULL,
-    PRIMARY KEY(user_ID)
-    );
-    
+
 SHOW TABLES;
 SELECT * from users;
 SELECT * from booksModel;
@@ -22,6 +14,15 @@ DESCRIBE user2WishlistModel;
 DESCRIBE wishlistModel;
 commit; 
 
+DROP table users;
+CREATE TABLE users(
+	user_ID INT NOT NULL UNIQUE AUTO_INCREMENT,
+    userName VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(64) NOT NULL,
+    PRIMARY KEY(user_ID)
+    );
+    
 DROP table booksModel ;
 CREATE TABLE booksModel (
                     google_ID VARCHAR(12) UNIQUE PRIMARY KEY NOT NULL,                   
@@ -34,22 +35,17 @@ CREATE TABLE booksModel (
                     selflink VARCHAR(255),
                     publishDate DATE
                     );
+                    
 DROP table users2booksModel ;
 CREATE TABLE users2booksModel (
                     user_ID INT NOT NULL,
                     google_ID VARCHAR(12) NOT NULL,
                     PRIMARY KEY (user_ID, google_ID)
                     );
+                    
 DROP table user2WishlistModel ;                
 CREATE TABLE user2WishlistModel (
                     user_ID INT NOT NULL,
                     google_ID VARCHAR(12) NOT NULL,
                     PRIMARY KEY (user_ID, google_ID)
                     );                    
-DROP table wishlistModel ;
-CREATE TABLE wishlistModel (
-                    user_ID int not null,
-                    google_ID VARCHAR(12) not null,
-                    PRIMARY KEY (user_ID, google_ID)
-                    );
-				
