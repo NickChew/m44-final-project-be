@@ -7,6 +7,16 @@ const users = sequelize.define("users", {
       allowNull: false,
       primaryKey: true
     },
+    firstName:{
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      unique: "firstName"
+    },
+    surname:{
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      unique: "surname"
+    },
     userName: {
       type: DataTypes.STRING(255),
       allowNull: false,

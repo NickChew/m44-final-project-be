@@ -30,7 +30,7 @@ const booksModel = sequelize.define("booksModel",{
     type: DataTypes.STRING(255),
     allowNull: true
   },
-  selflink: {
+  selfLink: {
     type: DataTypes.STRING(255),
     allowNull: true
   },

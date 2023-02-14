@@ -23,7 +23,7 @@ exports.addBooks = async (request, response) => {
             console.log("Already in Library")
         }
         console.log("user2book created");
-        response.status(200).send("Completed");
+        response.status(200).send({msg: "Completed"});
     } catch (error) {
         console.log(error);
         response.status(500).send({error: error.message});
@@ -47,7 +47,7 @@ exports.addWishBooks = async (request, response) => {
             console.log("Already in WishList")
         }
         console.log("user2book created");
-        response.status(200).send("Completed");
+        response.status(200).send({msg: "Completed"});
     } catch (error) {
         console.log(error);
         response.status(500).send({error: error.message});
@@ -66,7 +66,7 @@ exports.listBooks = async (request, response) => {
             const element = await booksModel.findOne({where:{google_ID:books[index].dataValues.google_ID}});
             bookDetails.push(element)
         }
-        response.status(218).send(bookDetails);
+        response.status(218).send({books: bookDetails});
     } catch (error) {
         console.log(error);
         response.status(500).send({error: error.message});
@@ -84,7 +84,7 @@ exports.listWishBooks = async (request, response) => {
             const element = await booksModel.findOne({where:{google_ID:books[index].dataValues.google_ID}});
             bookDetails.push(element)
         }
-        response.status(218).send(bookDetails);
+        response.status(218).send({books: bookDetails});
     } catch (error) {
         console.log(error);
         response.status(500).send({error: error.message});
@@ -97,7 +97,7 @@ exports.deleteBooks = async (request, response) => {
     try {
         const deletedBook = await User2BookModel.destroy({where: {user_ID: request.body.user_ID, google_ID : request.body.google_ID}});  
         if (deletedBook > 0) {
-            response.status(200).send("book Deleted");
+            response.status(200).send({msg: "book Deleted"});
         }
         else {
             throw new Error("Did not delete.");
@@ -114,7 +114,7 @@ exports.deleteWishBooks = async (request, response) => {
     try {
         const deletedWishBook = await user2WishlistModel.destroy({where: {user_ID: request.body.user_ID, google_ID : request.body.google_ID}}); 
         if (deletedWishBook > 0) {
-            response.status(200).send("book Deleted from Wishlist");
+            response.status(200).send({msg: "book Deleted from Wishlist"});
         }
         else {
             throw new Error("Did not delete.");
