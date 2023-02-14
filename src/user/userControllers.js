@@ -36,11 +36,10 @@ exports.login = async (request,response) => {
 
 exports.updatedEmail = async (request,response) => {
   try {
-    //code with update/replace user email goes here updateOne equivilent in sequelize
     const updatedEmail = await users.update(
       {email: request.body.email}, {where: {userName: request.body.userName}}
     );
-  response.status(200).send({message:"Success",updatedEmail})
+  response.status(200).send({message:"Success", updatedEmail})
   } catch (error) {
     console.log(error);
     response.status(500).send({error: error.message})
@@ -50,7 +49,7 @@ exports.updatedEmail = async (request,response) => {
 exports.deleteUser = async (request,response) => {
   try {
     const delUser = await users.destroy({where: {userName: request.body.userName}}); 
-  response.status(200).send({message:"Deleted",delUser})
+  response.status(200).send({message:"Deleted", delUser})
   } catch (error) {
     console.log(error);
     response.status(500).send({error: error.message})
