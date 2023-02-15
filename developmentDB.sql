@@ -16,8 +16,8 @@ commit;
 DROP table users;
 CREATE TABLE users(
 	user_ID INT NOT NULL UNIQUE AUTO_INCREMENT,
-    firstName VARCHAR(255) NOT NULL UNIQUE,
-    surName VARCHAR(255) NOT NULL UNIQUE,
+    firstName VARCHAR(255) NOT NULL,
+    surname VARCHAR(255) NOT NULL,
     userName VARCHAR(255) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(64) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE booksModel (
 	thumbnail VARCHAR(255),
 	description VARCHAR(2047),
 	category VARCHAR(255),
-	selflink VARCHAR(255),
+	selfLink VARCHAR(255),
 	publishDate DATE
 	);
                     
