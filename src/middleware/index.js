@@ -22,12 +22,12 @@ exports.hashPass = async (request,response,next) => {
 exports.comparePass = async (request,response,next) => {
   try {
     // console.log(request.body);
-    request.user = await User.findOne({where:{userName: request.body.userName}});
-    // console.log(request.user);
-    // console.log(request.body);
+    request.user = await User.findOne({where:{email: request.body.oldEmail}});
+    console.log(request.user);
+    console.log(request.body.password);
     //This pulls the user info from the databse including the hashed password
     const passCheck = await bcrypt.compare(request.body.password, request.user.password)
-    // console.log(passCheck);
+    console.log(passCheck);
     //This compares the unhashed password in the resquest body to the hashed password we stored in request.user
     if (request.user && passCheck) {
       console.log("username exists and password is correct");
