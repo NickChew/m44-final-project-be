@@ -24,7 +24,7 @@ exports.listUsers = async (request,response) => {
 
 exports.login = async (request,response) => {
   try {
-    const getuser = await users.findOne({where: {userName: request.body.userName}});
+    const getuser = await users.findOne({where: {email: request.body.email}});
     const getuserID = getuser.user_ID
     const token = jwt.sign({user_ID: getuserID},process.env.SECRET_KEY);
     response.send({token: token, user: getuser});
@@ -37,7 +37,7 @@ exports.login = async (request,response) => {
 exports.updatedEmail = async (request,response) => {
   try {
     const updatedEmail = await users.update(
-      {email: request.body.email}, {where: {userName: request.body.userName}}
+      {email: request.body.email}, {where: {email: request.body.oldEmail}}
     );
   response.status(200).send({msg:"Success"})
   } catch (error) {
@@ -48,7 +48,7 @@ exports.updatedEmail = async (request,response) => {
 
 exports.deleteUser = async (request,response) => {
   try {
-    const delUser = await users.destroy({where: {userName: request.body.userName}}); 
+    const delUser = await users.destroy({where: {email: request.body.email}}); 
   response.status(200).send({msg:"Deleted"})
   } catch (error) {
     console.log(error);
