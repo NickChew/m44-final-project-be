@@ -11,7 +11,7 @@ exports.addBooks = async (request, response) => {
     try {     
         const checkBookExists = await booksModel.findOne({where:{google_ID:request.body.google_ID}})
         if (checkBookExists===null) {
-            const newaddBooks = await booksModel.create({google_ID: request.body.google_ID, ISBN:request.body.ISBN, title:request.body.title, author:request.body.author, thumbnail:request.body.thumbnail, description:request.body.description, category:request.body.category, selflink:request.body.selflink, publishDate:request.body.publishDate}); 
+            const newaddBooks = await booksModel.create({google_ID: request.body.google_ID, ISBN:request.body.ISBN, title:request.body.title, author:request.body.author, thumbnail:request.body.thumbnail, description:request.body.description, category:request.body.category, selfLink:request.body.selfLink, publishDate:request.body.publishDate}); 
         } else {
             console.log("Book already exists");
         }                               
@@ -35,7 +35,7 @@ exports.addWishBooks = async (request, response) => {
     try {     
         const checkBookExists = await booksModel.findOne({where:{google_ID:request.body.google_ID}})
         if (checkBookExists===null) {
-            const newaddBooks = await booksModel.create({google_ID: request.body.google_ID, ISBN:request.body.ISBN, title:request.body.title, author:request.body.author, thumbnail:request.body.thumbnail, description:request.body.description, category:request.body.category, selflink:request.body.selflink, publishDate:request.body.publishDate}); 
+            const newaddBooks = await booksModel.create({google_ID: request.body.google_ID, ISBN:request.body.ISBN, title:request.body.title, author:request.body.author, thumbnail:request.body.thumbnail, description:request.body.description, category:request.body.category, selfLink:request.body.selfLink, publishDate:request.body.publishDate}); 
         } else {
             console.log("Book already exists");
         }                               

@@ -1,0 +1,5 @@
+user_ID,firstName,surname,userName,email,password
+1,Nick,C16,NickC16,New@EmailAddedC16.com,$2b$10$Co5bBTeoWQUzJQA900o3PuQgmcsRpffOFk/eiIPZwPCjrIUcm52G2
+2,Joe,Bloggs,j.bloggs,jbloggs@gmail.com,$2b$10$dRvaJfcm7owgpl.zFprnrOO96UC9Wbi5xwvAq3dmZ.NJr0V3pIV/K
+3,hasan,abc,hsnadrs55,hsnadrs77@yahoo.com,$2b$10$b1lVpUeY8P4iMd67fg/Y3.78QWpjUqhXmw0Ju17yxfKcGlQImpwOy
+7,hsnadrs122,tadaa,hsnadrs122,hsnadrs122@yahoo.com,$2b$10$IonCyfOlYNnHi4kFWpoaS.UEZdqU0717rYMh8YVNTcdkE.3ocxy/e
