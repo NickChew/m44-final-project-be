@@ -15,9 +15,9 @@ exports.addBooks = async (request, response) => {
         } else {
             console.log("Book already exists");
         }                               
-        const checkBookinLibrary = await User2BookModel.findOne({where:{google_ID:request.body.google_ID, user_ID:request.body.user_ID}})
+        const checkBookinLibrary = await User2BookModel.findOne({where:{google_ID:request.body.google_ID, user_ID:request.user.user_ID}})
         if (checkBookinLibrary === null) {
-            const newUsers_Books = await User2BookModel.create({user_ID:request.body.user_ID, google_ID:request.body.google_ID});        
+            const newUsers_Books = await User2BookModel.create({user_ID:request.user.user_ID, google_ID:request.body.google_ID});        
         } 
         else {
             console.log("Already in Library")
@@ -39,9 +39,9 @@ exports.addWishBooks = async (request, response) => {
         } else {
             console.log("Book already exists");
         }                               
-        const checkBookinWishlist = await user2WishlistModel.findOne({where:{google_ID:request.body.google_ID, user_ID:request.body.user_ID}})
+        const checkBookinWishlist = await user2WishlistModel.findOne({where:{google_ID:request.body.google_ID, user_ID:request.user.user_ID}})
         if (checkBookinWishlist === null) {
-            const newUsers_Books = await user2WishlistModel.create({user_ID:request.body.user_ID, google_ID:request.body.google_ID});        
+            const newUsers_Books = await user2WishlistModel.create({user_ID:request.user.user_ID, google_ID:request.body.google_ID});        
         } 
         else {
             console.log("Already in WishList")
@@ -95,7 +95,7 @@ exports.listWishBooks = async (request, response) => {
 //check book is in db 1st then delete, cant delete Book Not there.
 exports.deleteBooks = async (request, response) => {
     try {
-        const deletedBook = await User2BookModel.destroy({where: {user_ID: request.body.user_ID, google_ID : request.body.google_ID}});  
+        const deletedBook = await User2BookModel.destroy({where: {user_ID: request.user.user_ID, google_ID : request.body.google_ID}});  
         if (deletedBook > 0) {
             response.status(200).send({msg: "book Deleted"});
         }
@@ -112,7 +112,7 @@ exports.deleteBooks = async (request, response) => {
 //check book is in db 1st then delete, cant delete Book Not there.
 exports.deleteWishBooks = async (request, response) => {
     try {
-        const deletedWishBook = await user2WishlistModel.destroy({where: {user_ID: request.body.user_ID, google_ID : request.body.google_ID}}); 
+        const deletedWishBook = await user2WishlistModel.destroy({where: {user_ID: request.user.user_ID, google_ID : request.body.google_ID}}); 
         if (deletedWishBook > 0) {
             response.status(200).send({msg: "book Deleted from Wishlist"});
         }
